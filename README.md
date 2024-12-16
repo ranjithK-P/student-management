@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# Deployment Guide for Student Management Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This document provides step-by-step instructions for deploying the Student Management Application, which includes the React frontend and the backend API.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+1. **Server Requirements:**
+   - Node.js v18
+   - NPM v8 or above
+   - A web server (e.g., Nginx or Apache)
 
-### `npm start`
+2. **Environment Setup:**
+   - SSH access to the deployment server.
+   - A GitHub account and access to the repository [https://github.com/ranjithK-P/student-management](https://github.com/ranjithK-P/student-management).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 1. Clone the Repository
 
-### `npm test`
+SSH into the deployment server and navigate to the directory where you want to deploy the application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+ssh your_user@your_server_ip
+cd /path/to/deployment/directory
+git clone https://github.com/ranjithK-P/student-management.git
+cd student-management
+```
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 2. Install Dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Navigate to the React frontend to install dependencies.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### For the Frontend:
 
-### `npm run eject`
+```bash
+cd frontend
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 3. Run the React Application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The React app needs to be built for production.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+cd frontend
+npm run
+```
+---
 
-## Learn More
+## 4. Test the Deployment
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Open your browser and navigate to your domain or server IP.
+2. Ensure that:
+   - The React application loads correctly.
+   - The backend API is accessible via `https://educhain.free.beeceptor.com/applications`.
+   - Search, pagination, and sorting work as expected.
+3. Verify that the application listing is accessible at:
+   
+   http://localhost:3000/applications   
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 5. Update the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+When changes are pushed to the repository, follow these steps to update:
 
-### Analyzing the Bundle Size
+1. Pull the latest changes:
+   ```bash
+   git pull origin master
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+2. For the React app:
+   ```bash
+   cd frontend
+   npm install
+   npm run build
+   sudo cp -r build/ /var/www/student-management
+   ```
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Your application is now deployed and ready to use!
